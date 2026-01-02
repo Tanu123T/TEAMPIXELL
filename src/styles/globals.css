@@ -1,0 +1,1581 @@
+@import "tailwindcss";
+
+:root {
+  --background: 8 8 18;
+  --foreground: 240 249 255;
+  --card: 20 20 35;
+  --card-foreground: 240 249 255;
+  --popover: 20 20 35;
+  --popover-foreground: 240 249 255;
+  --primary: 139 92 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 236 72 153;
+  --secondary-foreground: 255 255 255;
+  --muted: 30 30 45;
+  --muted-foreground: 224 242 254;
+  --accent: 6 182 212;
+  --accent-foreground: 255 255 255;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border: 139 92 246 / 0.3;
+  --input: 20 20 35;
+  --ring: 139 92 246;
+  --chart-1: 139 92 246;
+  --chart-2: 236 72 153;
+  --chart-3: 6 182 212;
+  --chart-4: 59 130 246;
+  --chart-5: 168 85 247;
+  --radius: 0.75rem;
+  --body-bg-start: 10, 14, 39;
+  --body-bg-mid: 15, 23, 42;
+  --body-bg-end: 8, 12, 28;
+  --body-text: 240, 249, 255;
+}
+
+.dark {
+  --background: 8 8 18;
+  --foreground: 240 249 255;
+  --card: 20 20 35;
+  --card-foreground: 240 249 255;
+  --popover: 20 20 35;
+  --popover-foreground: 240 249 255;
+  --primary: 139 92 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 236 72 153;
+  --secondary-foreground: 255 255 255;
+  --muted: 30 30 45;
+  --muted-foreground: 224 242 254;
+  --accent: 6 182 212;
+  --accent-foreground: 255 255 255;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border: 139 92 246 / 0.3;
+  --input: 20 20 35;
+  --ring: 139 92 246;
+  --body-bg-start: 10, 14, 39;
+  --body-bg-mid: 15, 23, 42;
+  --body-bg-end: 8, 12, 28;
+  --body-text: 240, 249, 255;
+}
+
+
+/* Performance optimizations */
+* {
+  /* Optimize rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Reduce repaints */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* GPU acceleration only when needed */
+}
+
+/* Reduce animations on mobile/prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  /* Reduce heavy effects on mobile */
+  * {
+    will-change: auto !important;
+  }
+
+  /* Disable expensive filters on mobile */
+  [style*="filter"],
+  [class*="blur"] {
+    filter: none !important;
+  }
+
+  /* Reduce backdrop blur on mobile */
+  [class*="backdrop-blur"] {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+
+  /* Simplify gradients on mobile */
+  body::before,
+  body::after {
+    opacity: 0.2 !important;
+  }
+}
+
+/* Custom Keyframe Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate-in {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4),
+                0 0 40px rgba(59, 130, 246, 0.2),
+                0 0 60px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6),
+                0 0 60px rgba(59, 130, 246, 0.4),
+                0 0 90px rgba(59, 130, 246, 0.2);
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4),
+                0 0 30px rgba(59, 130, 246, 0.2);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Add these new keyframe animations near the top with other keyframes */
+
+@keyframes mesh-move {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translate(50px, -50px) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-30px, 30px) scale(0.9);
+    opacity: 0.35;
+  }
+  75% {
+    transform: translate(30px, 50px) scale(1.05);
+    opacity: 0.45;
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(100px, 100px);
+  }
+}
+
+@keyframes background-pulse {
+  0%, 100% {
+    filter: brightness(1) contrast(1);
+  }
+  50% {
+    filter: brightness(1.05) contrast(1.02);
+  }
+}
+
+/* Smooth scrolling for the entire page - Enhanced */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgb(var(--body-bg-start)) 0%,
+    rgb(var(--body-bg-mid)) 25%,
+    rgb(var(--body-bg-end)) 50%,
+    rgb(var(--body-bg-mid)) 75%,
+    rgb(var(--body-bg-start)) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  color: rgb(var(--body-text));
+  font-family: 'Bubblegum Sans', cursive, sans-serif;
+  overflow-x: hidden;
+  /* Performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  /* Prevent horizontal scroll */
+  max-width: 100vw;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Optimize background animations - pause on mobile */
+@media (max-width: 768px) {
+  body {
+    animation: none !important;
+  }
+  
+  body::before,
+  body::after {
+    animation: none !important;
+  }
+}
+
+/* Smooth scroll container */
+main {
+  /* Enable hardware acceleration only when scrolling */
+  transform: translateZ(0);
+  /* Remove will-change - too heavy */
+}
+
+/* Individual sections - optimize for performance */
+section,
+[id] {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Only use will-change during animation */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Custom scrollbar - simpler on mobile */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(10, 14, 39);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(59, 130, 246), rgb(6, 182, 212));
+  border-radius: 10px;
+  border: 2px solid rgb(10, 14, 39);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgb(96, 165, 250), rgb(103, 232, 249));
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(59, 130, 246) rgb(10, 14, 39);
+}
+
+/* Smooth scroll easing utility */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+@layer base {
+  /* Apply Bubblegum Sans to all text elements */
+  body,
+  * {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+  }
+
+  /* Mobile font size adjustments */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+    
+    h1 {
+      font-size: 2rem !important;
+      line-height: 1.2 !important;
+    }
+    
+    h2 {
+      font-size: 1.75rem !important;
+      line-height: 1.3 !important;
+    }
+    
+    h3 {
+      font-size: 1.5rem !important;
+      line-height: 1.4 !important;
+    }
+    
+    p {
+      font-size: 0.95rem !important;
+      line-height: 1.6 !important;
+    }
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+  }
+
+  /* Paragraphs */
+  p {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  /* Navigation - Mobile optimized */
+  nav,
+  nav * {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Buttons - Mobile touch targets */
+  button {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+    color: rgb(255, 255, 255) !important;
+    /* Ensure touch targets are at least 44px */
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* All button text should be white */
+  button,
+  button *,
+  [data-slot="button"],
+  [data-slot="button"] * {
+    color: rgb(255, 255, 255) !important;
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+  }
+
+  /* Style all icons with bright vibrant blue colors */
+  svg:not([class*="bg-clip-text"]),
+  [class*="lucide"]:not([class*="bg-clip-text"]),
+  [class*="icon"]:not([class*="bg-clip-text"]),
+  [class*="Icon"]:not([class*="bg-clip-text"]) {
+    color: rgb(96, 165, 250) !important;
+    stroke: rgb(96, 165, 250) !important;
+    fill: none !important;
+    stroke-width: 2 !important;
+    filter: drop-shadow(0 0 2px rgba(96, 165, 250, 0.5));
+  }
+
+  /* Icons inside buttons should be white */
+  button svg,
+  button [class*="lucide"],
+  [data-slot="button"] svg,
+  [data-slot="button"] [class*="lucide"],
+  button [class*="icon"],
+  [data-slot="button"] [class*="icon"] {
+    color: rgb(255, 255, 255) !important;
+    stroke: rgb(255, 255, 255) !important;
+    fill: none !important;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  }
+
+  /* Icons with text-blue classes - make them brighter */
+  [class*="text-blue"] svg,
+  svg[class*="text-blue"],
+  [class*="text-blue-300"] svg,
+  [class*="text-blue-400"] svg {
+    color: rgb(147, 197, 253) !important;
+    stroke: rgb(147, 197, 253) !important;
+    filter: drop-shadow(0 0 3px rgba(147, 197, 253, 0.6));
+  }
+
+  /* Hover states for icons - brighter glow */
+  svg:hover,
+  [class*="lucide"]:hover,
+  [class*="icon"]:hover {
+    color: rgb(147, 197, 253) !important;
+    stroke: rgb(147, 197, 253) !important;
+    filter: drop-shadow(0 0 4px rgba(147, 197, 253, 0.8));
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+  }
+
+  /* Icons in interactive elements */
+  a svg,
+  a [class*="lucide"],
+  [role="button"] svg {
+    color: rgb(96, 165, 250) !important;
+    stroke: rgb(96, 165, 250) !important;
+  }
+
+  /* Icons in cards and containers */
+  .bg-card svg,
+  [class*="card"] svg {
+    color: rgb(147, 197, 253) !important;
+    stroke: rgb(147, 197, 253) !important;
+  }
+
+  /* Emojis with original colors */
+  .emoji-original {
+    color: initial !important;
+    -webkit-text-fill-color: initial !important;
+    font-variant-emoji: emoji;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", emoji;
+    display: inline-block;
+  }
+
+  /* Golden icons - Sparkles, Star, Award, Zap */
+  /* Target icons with icon-golden class */
+  .icon-golden,
+  svg.icon-golden,
+  [class*="icon-golden"] {
+    color: rgb(234, 179, 8) !important; /* yellow-500 - golden color */
+    stroke: rgb(234, 179, 8) !important;
+    fill: none !important;
+    filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  }
+
+  /* Filled star icons with icon-golden class should have golden fill */
+  svg.icon-golden[class*="fill-yellow"],
+  .icon-golden[class*="fill-yellow"],
+  svg.icon-golden.fill-yellow-400,
+  .icon-golden.fill-yellow-400 {
+    fill: rgb(234, 179, 8) !important; /* golden fill for stars */
+    color: rgb(234, 179, 8) !important;
+    stroke: rgb(234, 179, 8) !important;
+    filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  }
+
+  /* All star icons should be golden (including filled rating stars) */
+  /* Star icons in rating sections */
+  svg.fill-yellow-400.text-yellow-400,
+  svg.text-yellow-400.icon-golden {
+    fill: rgb(234, 179, 8) !important; /* golden fill */
+    color: rgb(234, 179, 8) !important;
+    stroke: rgb(234, 179, 8) !important;
+    filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  }
+
+  /* Star SVG icons with icon-golden class should have golden fill */
+  svg.icon-golden[fill="currentColor"],
+  svg.icon-golden {
+    fill: rgb(234, 179, 8) !important;
+    color: rgb(234, 179, 8) !important;
+  }
+
+  .flex.gap-0\.5 svg.fill-yellow-400,
+  .flex.gap-1 svg.fill-yellow-400 {
+    fill: rgb(234, 179, 8) !important;
+    color: rgb(234, 179, 8) !important;
+    stroke: rgb(234, 179, 8) !important;
+    filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  }
+
+  /* Award icon in stats section recognition area (already has text-yellow-400, but ensure it's golden) */
+  .text-sm.text-blue-400 svg.size-4.text-yellow-400 {
+    color: rgb(234, 179, 8) !important;
+    stroke: rgb(234, 179, 8) !important;
+    fill: none !important;
+    filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  }
+
+  /* Golden emoji icons - improved styling */
+  .icon-golden-emoji {
+    display: inline-block;
+    font-size: 1.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.9))
+            drop-shadow(0 0 10px rgba(234, 179, 8, 0.6))
+            drop-shadow(0 0 14px rgba(234, 179, 8, 0.3))
+            brightness(1.15)
+            saturate(1.4)
+            contrast(1.1);
+    transform: scale(1);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(234, 179, 8, 0.8),
+                 0 0 15px rgba(234, 179, 8, 0.6),
+                 0 0 20px rgba(234, 179, 8, 0.4);
+    position: relative;
+  }
+
+  .icon-golden-emoji::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: radial-gradient(circle, rgba(234, 179, 8, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .icon-golden-emoji:hover {
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 1))
+            drop-shadow(0 0 14px rgba(251, 191, 36, 0.7))
+            drop-shadow(0 0 20px rgba(251, 191, 36, 0.4))
+            brightness(1.25)
+            saturate(1.5)
+            contrast(1.15);
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.9),
+                 0 0 18px rgba(251, 191, 36, 0.7),
+                 0 0 24px rgba(251, 191, 36, 0.5);
+    transform: scale(1.2);
+  }
+
+  .icon-golden-emoji:hover::before {
+    opacity: 1;
+  }
+
+  /* Award icons inside gradient containers should remain white (they're on colored backgrounds) */
+  [class*="bg-gradient-to-br"] svg.icon-golden.text-white,
+  [class*="bg-gradient-to-br"] .icon-golden.text-white {
+    color: rgb(255, 255, 255) !important;
+    stroke: rgb(255, 255, 255) !important;
+  }
+
+  /* Zap icon in buttons should remain white (button text rule takes precedence) */
+  button .icon-golden,
+  button svg.icon-golden,
+  [data-slot="button"] .icon-golden,
+  [data-slot="button"] svg.icon-golden {
+    color: rgb(255, 255, 255) !important;
+    stroke: rgb(255, 255, 255) !important;
+  }
+
+  /* Hover states for golden icons */
+  .icon-golden:hover,
+  svg.icon-golden:hover,
+  [class*="icon-golden"]:hover {
+    color: rgb(251, 191, 36) !important; /* yellow-400 - brighter golden on hover */
+    stroke: rgb(251, 191, 36) !important;
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.8));
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+  /* Hover for filled star icons */
+  svg[class*="fill-yellow"]:hover,
+  svg.fill-yellow-400:hover {
+    fill: rgb(251, 191, 36) !important;
+    color: rgb(251, 191, 36) !important;
+    stroke: rgb(251, 191, 36) !important;
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.8));
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    button {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Links */
+  a {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+  }
+
+  /* Small text - readable on mobile */
+  small,
+  .text-sm,
+  .text-xs {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+  }
+
+  @media (max-width: 768px) {
+    .text-xs {
+      font-size: 0.75rem;
+    }
+    
+    .text-sm {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Small text with bright blue gradient */
+  html.dark small:not([class*="bg-clip-text"]),
+  html.dark .text-sm:not([class*="bg-clip-text"]),
+  html.dark .text-xs:not([class*="bg-clip-text"]) {
+    background: linear-gradient(135deg, 
+      rgb(147, 197, 253) 0%,
+      rgb(96, 165, 250) 25%,
+      rgb(59, 130, 246) 50%,
+      rgb(34, 211, 238) 75%,
+      rgb(125, 211, 252) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Labels and form elements */
+  label,
+  input,
+  textarea,
+  select {
+    font-family: 'Bubblegum Sans', cursive, sans-serif;
+    font-weight: 400;
+    /* Mobile input optimizations */
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  @media (max-width: 768px) {
+    input,
+    textarea,
+    select {
+      padding: 0.75rem;
+      font-size: 16px;
+    }
+  }
+
+  /* Make all text use theme-aware foreground color */
+  body,
+  h1:not([class*="bg-clip-text"]):not(.hero-headline-white),
+  h2:not([class*="bg-clip-text"]),
+  h3:not([class*="bg-clip-text"]),
+  h4:not([class*="bg-clip-text"]),
+  h5:not([class*="bg-clip-text"]),
+  h6:not([class*="bg-clip-text"]),
+  p, span:not([class*="bg-clip-text"]), 
+  div:not([class*="bg-clip-text"]), 
+  a:not([class*="bg-clip-text"]), 
+  li, td, th,
+  label, input, textarea, select {
+    color: rgb(var(--foreground));
+  }
+
+  /* Ensure all paragraph text is lightest blue in dark theme */
+  html.dark p {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Ensure all span text is lightest blue in dark theme */
+  html.dark span:not([class*="bg-clip-text"]) {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Ensure all div text is lightest blue in dark theme */
+  html.dark div:not([class*="bg-clip-text"]) {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Dark theme: Ensure no black colors are used - override with lightest blue */
+  html.dark body,
+  html.dark h1:not([class*="bg-clip-text"]),
+  html.dark h2:not([class*="bg-clip-text"]),
+  html.dark h3:not([class*="bg-clip-text"]),
+  html.dark h4:not([class*="bg-clip-text"]),
+  html.dark h5:not([class*="bg-clip-text"]),
+  html.dark h6:not([class*="bg-clip-text"]),
+  html.dark p:not([class*="bg-clip-text"]),
+  html.dark span:not([class*="bg-clip-text"]),
+  html.dark div:not([class*="bg-clip-text"]),
+  html.dark li:not([class*="bg-clip-text"]),
+  html.dark td:not([class*="bg-clip-text"]),
+  html.dark th:not([class*="bg-clip-text"]),
+  html.dark label:not([class*="bg-clip-text"]),
+  html.dark input:not([class*="bg-clip-text"]),
+  html.dark textarea:not([class*="bg-clip-text"]),
+  html.dark select:not([class*="bg-clip-text"]) {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Dark theme: Headings with lightest blue tint */
+  html.dark h1:not([class*="bg-clip-text"]):not(.hero-headline-white),
+  html.dark h2:not([class*="bg-clip-text"]),
+  html.dark h3:not([class*="bg-clip-text"]) {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Hero headline - white color override */
+  .hero-headline-white,
+  html.dark .hero-headline-white {
+    color: rgb(255, 255, 255) !important;
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+  }
+
+  /* Dark theme: Subheadings with lightest blue */
+  html.dark h4:not([class*="bg-clip-text"]),
+  html.dark h5:not([class*="bg-clip-text"]),
+  html.dark h6:not([class*="bg-clip-text"]) {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Dark theme: Links with lightest blue */
+  html.dark a:not([class*="bg-clip-text"]) {
+    color: rgb(219, 234, 254) !important;
+  }
+
+  html.dark a:not([class*="bg-clip-text"]):hover {
+    color: rgb(240, 249, 255) !important;
+  }
+
+
+  /* Override text color utility classes to use theme colors */
+  .text-foreground {
+    color: rgb(var(--foreground)) !important;
+  }
+
+  /* Dark theme: Ensure text-foreground is lightest blue, never black */
+  html.dark .text-foreground {
+    color: rgb(240, 249, 255) !important;
+  }
+  
+  /* Convert muted-foreground to bright blue gradient */
+  .text-muted-foreground {
+    background: linear-gradient(135deg, 
+      rgb(96, 165, 250) 0%,
+      rgb(59, 130, 246) 25%,
+      rgb(37, 99, 235) 50%,
+      rgb(6, 182, 212) 75%,
+      rgb(34, 211, 238) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Dark theme: bright blue gradient for muted-foreground */
+  html.dark .text-muted-foreground {
+    background: linear-gradient(135deg, 
+      rgb(147, 197, 253) 0%,
+      rgb(96, 165, 250) 25%,
+      rgb(59, 130, 246) 50%,
+      rgb(34, 211, 238) 75%,
+      rgb(125, 211, 252) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Ensure all children of text-muted-foreground also use bright blue gradient */
+  html.dark .text-muted-foreground p,
+  html.dark .text-muted-foreground span,
+  html.dark .text-muted-foreground div,
+  html.dark .text-muted-foreground *:not([class*="bg-clip-text"]) {
+    background: linear-gradient(135deg, 
+      rgb(147, 197, 253) 0%,
+      rgb(96, 165, 250) 25%,
+      rgb(59, 130, 246) 50%,
+      rgb(34, 211, 238) 75%,
+      rgb(125, 211, 252) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Convert blue text colors to lightest blue gradients */
+  [class*="text-blue"]:not([class*="bg-clip-text"]):not(.text-foreground) {
+    background: linear-gradient(135deg, 
+      rgb(240, 249, 255) 0%,
+      rgb(219, 234, 254) 50%,
+      rgb(191, 219, 254) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Dark theme: lightest blue gradient */
+  html.dark [class*="text-blue"]:not([class*="bg-clip-text"]):not(.text-foreground) {
+    background: linear-gradient(135deg, 
+      rgb(240, 249, 255) 0%,
+      rgb(219, 234, 254) 50%,
+      rgb(191, 219, 254) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Dark theme: Override any black text colors with lightest blue */
+  html.dark [class*="text-black"],
+  html.dark [style*="rgb(0, 0, 0)"],
+  html.dark [style*="rgb(0,0,0)"],
+  html.dark [style*="rgb(1, 1, 1)"],
+  html.dark [style*="rgb(1,1,1)"],
+  html.dark [style*="rgb(8, 8, 18)"],
+  html.dark [style*="rgb(8,8,18)"],
+  html.dark [style*="rgb(255, 255, 255)"],
+  html.dark [style*="rgb(255,255,255)"] {
+    color: rgb(240, 249, 255) !important;
+  }
+
+  /* Convert cyan text colors to lightest blue gradients */
+  [class*="text-cyan"]:not([class*="bg-clip-text"]):not(.text-foreground) {
+    background: linear-gradient(135deg, 
+      rgb(224, 242, 254) 0%,
+      rgb(186, 230, 253) 50%,
+      rgb(191, 219, 254) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Dark theme: lightest cyan gradient */
+  html.dark [class*="text-cyan"]:not([class*="bg-clip-text"]):not(.text-foreground) {
+    background: linear-gradient(135deg, 
+      rgb(240, 249, 255) 0%,
+      rgb(224, 242, 254) 50%,
+      rgb(186, 230, 253) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Keep gradient text effects */
+  [class*="bg-clip-text"] {
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Animated mesh gradient overlay - reduced on mobile */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.3;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    animation: mesh-move 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    body::before {
+      opacity: 0.15;
+      animation: none;
+    }
+  }
+
+  /* Animated grid pattern overlay - disabled on mobile */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.02;
+    background-image: 
+      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: grid-move 30s linear infinite;
+    pointer-events: none;
+  }
+
+
+  @media (max-width: 768px) {
+    body::after {
+      display: none;
+    }
+  }
+
+  /* Ensure content is above background layers */
+  #root,
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Video loading states */
+  video {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  video:not([data-loaded]) {
+    opacity: 0;
+  }
+
+  video[data-loaded] {
+    opacity: 1;
+  }
+
+  /* Mobile video optimizations */
+  @media (max-width: 768px) {
+    video {
+      /* Reduce video quality on mobile if needed */
+      object-fit: cover;
+    }
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: rgb(var(--foreground));
+  }
+
+  ::-moz-selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: rgb(var(--foreground));
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid rgb(59, 130, 246);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+
+  /* Smooth transitions - optimized */
+  button, a, input, textarea, select {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Image optimization */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* Lazy loading */
+    loading: lazy;
+    /* Prevent layout shift */
+    width: 100%;
+    height: auto;
+  }
+
+  /* Mobile image optimizations */
+  @media (max-width: 768px) {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@layer utilities {
+  /* Animation utility classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-reverse {
+    animation: float-reverse 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s linear infinite;
+    background-size: 2000px 100%;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite;
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.6s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.6s ease-out;
+  }
+
+  .animate-slide-in-up {
+    animation: slide-in-up 0.6s ease-out;
+  }
+
+  .animate-slide-in-down {
+    animation: slide-in-down 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out;
+  }
+
+  .animate-rotate-in {
+    animation: rotate-in 0.6s ease-out;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-border-glow {
+    animation: border-glow 2s ease-in-out infinite;
+  }
+
+  .animate-text-shimmer {
+    background-size: 200% auto;
+    background-image: linear-gradient(
+      90deg,
+      rgba(59, 130, 246, 0.5),
+      rgba(6, 182, 212, 1),
+      rgba(59, 130, 246, 0.5)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: text-shimmer 3s linear infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2),
+                0 0 20px rgba(59, 130, 246, 0.1);
+  }
+
+
+  .hover-glow {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5),
+                0 0 60px rgba(59, 130, 246, 0.3),
+                0 0 90px rgba(59, 130, 246, 0.1);
+    transform: scale(1.02);
+  }
+
+
+  .hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-brightness {
+    transition: filter 0.3s ease;
+  }
+
+  .hover-brightness:hover {
+    filter: brightness(1.2);
+  }
+
+  /* Interactive ripple effect */
+  .ripple-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .ripple-effect:active::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(15, 20, 41, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+
+  .glass-strong {
+    background: rgba(15, 20, 41, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+
+  /* Gradient text utilities */
+  .gradient-text-blue {
+    background: linear-gradient(135deg, rgb(59, 130, 246), rgb(6, 182, 212));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-text-purple {
+    background: linear-gradient(135deg, rgb(147, 51, 234), rgb(59, 130, 246));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Border gradient */
+  .border-gradient {
+    border: 2px solid transparent;
+    background-image: linear-gradient(rgb(10, 14, 39), rgb(10, 14, 39)),
+                      linear-gradient(135deg, rgb(59, 130, 246), rgb(6, 182, 212));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    border: 3px solid rgba(59, 130, 246, 0.2);
+    border-top: 3px solid rgb(59, 130, 246);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent);
+  }
+
+  .bg-gradient-mesh {
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(147, 51, 234, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+  }
+
+  /* Shine effect */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .shine:hover::before {
+    left: 100%;
+  }
+
+  /* Magnetic effect (for use with JavaScript) */
+  .magnetic {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-bounce {
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Text effects */
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5),
+                 0 0 20px rgba(59, 130, 246, 0.3),
+                 0 0 30px rgba(59, 130, 246, 0.1);
+  }
+
+  /* Cursor pointer with animation */
+  .cursor-glow {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cursor-glow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .cursor-glow:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Mobile card optimizations - 2 columns and reduced height */
+@media (max-width: 767px) {
+  /* Ensure cards in 2-column grids have proper spacing */
+  [class*="grid-cols-2"] > * {
+    min-width: 0; /* Prevent overflow */
+  }
+  
+  /* Reduce card padding and spacing on mobile */
+  [data-slot="card"],
+  [class*="card"],
+  .bg-card {
+    gap: 0.75rem !important; /* Reduced from gap-6 (1.5rem) */
+    padding: 0.75rem !important; /* Reduced padding */
+  }
+
+  /* Reduce card header padding on mobile */
+  [data-slot="card-header"] {
+    padding-top: 0.75rem !important; /* Reduced from pt-6 (1.5rem) */
+    padding-left: 0.75rem !important; /* Reduced from px-6 (1.5rem) */
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    gap: 0.5rem !important; /* Reduced gap */
+  }
+
+  /* Reduce card content padding on mobile */
+  [data-slot="card-content"] {
+    padding-left: 0.75rem !important; /* Reduced from px-6 */
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  /* Reduce card footer padding on mobile */
+  [data-slot="card-footer"] {
+    padding: 0.75rem !important; /* Reduced from px-6 pb-6 */
+  }
+
+  /* Reduce image heights in cards on mobile */
+  [class*="h-48"],
+  [class*="h-40"],
+  [class*="h-32"] {
+    height: 6rem !important; /* Reduced from h-48 (12rem) to 6rem */
+    min-height: 6rem !important;
+  }
+
+  /* Reduce spacing in card grids */
+  .grid.gap-8 > * {
+    margin-bottom: 0.5rem;
+  }
+
+  .grid.gap-6 > * {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Reduce icon sizes in cards on mobile */
+  [class*="card"] svg,
+  [class*="card"] [class*="icon"] {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  /* Reduce font sizes in cards on mobile */
+  [class*="card"] h3,
+  [class*="card"] h4 {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  [class*="card"] p,
+  [class*="card"] span {
+    font-size: 0.8125rem !important; /* ~13px */
+    line-height: 1.4 !important;
+  }
+
+  /* Reduce badge padding on mobile */
+  [class*="card"] [class*="badge"],
+  [class*="card"] [class*="px-3"],
+  [class*="card"] [class*="py-1"] {
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.6875rem !important; /* ~11px */
+  }
+
+  /* Reduce gap between card elements */
+  .space-y-6 > * + * {
+    margin-top: 0.75rem !important; /* Reduced from 1.5rem */
+  }
+
+  .space-y-8 > * + * {
+    margin-top: 1rem !important; /* Reduced from 2rem */
+  }
+
+  /* Reduce gap slightly on very small screens */
+  @media (max-width: 375px) {
+    .grid.gap-4 {
+      gap: 0.5rem;
+    }
+
+    [data-slot="card"],
+    [class*="card"] {
+      gap: 0.5rem !important;
+      padding: 0.5rem !important;
+    }
+  }
+}
+
+/* Ensure cards don't overflow on mobile */
+@media (max-width: 767px) {
+  /* Card content should wrap properly */
+  [data-slot="card"],
+  [class*="card"],
+  .bg-card {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
+    /* Ensure cards don't exceed viewport */
+    max-width: 100%;
+  }
+  
+  /* Reduce rounded corners slightly on mobile for space */
+  [class*="card"] [class*="rounded-3xl"],
+  [class*="card"] [class*="rounded-2xl"],
+  [class*="card"] [class*="rounded-xl"] {
+    border-radius: 0.75rem !important;
+  }
+}
+
+/* Specific height reductions for common card patterns */
+@media (max-width: 767px) {
+  /* Stats cards */
+  [class*="stat"] > div,
+  [class*="stat-card"] {
+    padding: 0.75rem !important;
+  }
+
+  /* Portfolio cards - reduce image area */
+  .group.relative > div[class*="h-48"],
+  .group.relative > div[class*="h-40"] {
+    height: 5rem !important;
+    min-height: 5rem !important;
+  }
+
+  /* Service/Expertise cards */
+  [class*="service"] > div,
+  [class*="expertise"] > div {
+    padding: 0.75rem !important;
+  }
+
+  /* Process step cards */
+  [class*="process"] > div,
+  [class*="step"] > div {
+    padding: 0.75rem !important;
+  }
+
+  /* Testimonial cards */
+  [class*="testimonial"] > div {
+    padding: 0.75rem !important;
+  }
+}
