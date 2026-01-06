@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
 export default defineConfig({
-  base: '/TEAMPIXELL/', 
+  base: '/', 
   plugins: [react()],
 
   resolve: {
@@ -53,7 +53,7 @@ export default defineConfig({
 
   build: {
     target: 'esnext',
-    outDir: 'build',
+    outDir: 'dist',
   },
 
   server: {
