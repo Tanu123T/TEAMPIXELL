@@ -16,11 +16,6 @@ function easeInOutCubic(t: number): number {
     : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-// Custom easing function for natural feel (easeOutQuart)
-function easeOutQuart(t: number): number {
-  return 1 - Math.pow(1 - t, 4);
-}
-
 export function smoothScrollTo(
   element: HTMLElement | null,
   options: SmoothScrollOptions = {}

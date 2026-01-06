@@ -61,7 +61,7 @@ export function Navigation() {
     <>
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 via-cyan-500 to-purple-500 origin-left z-[60]"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 origin-left z-[60]"
         style={{ scaleX: scrollYProgress }}
       />
 

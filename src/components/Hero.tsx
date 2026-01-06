@@ -16,7 +16,6 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [] = useState(false);
   
   useEffect(() => {
     let ticking = false;
@@ -53,6 +52,7 @@ export function Hero() {
         loop
         muted
         playsInline
+        preload="metadata"
         onLoadedData={handleVideoLoad}
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ filter: 'brightness(0.4) contrast(0.8)' }}
@@ -73,7 +73,8 @@ export function Hero() {
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
-            transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`
+            transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
+            willChange: 'transform'
           }}
         />
       </div>
