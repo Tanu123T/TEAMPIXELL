@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://teampixel.com",
+  "homepage": "https://teampixell.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
