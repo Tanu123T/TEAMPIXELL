@@ -23,9 +23,12 @@
   --radius: 1rem;
 }
 
-* {
-  box-sizing: border-box;
-}
+/* Custom Navy Palette */
+.bg-navy-dark { background-color: #0F172A; }
+.bg-navy-deep { background-color: #0F2A44; }
+.bg-navy-royal { background-color: #1E3A8A; }
+.bg-navy-slate { background-color: #334155; }
+.bg-navy-soft { background-color: #F1F5F9; }
 
 body {
   background: #FFFFFF !important;
@@ -44,24 +47,61 @@ body {
 }
 
 .navy-gradient {
-  background: linear-gradient(135deg, #0F2A44 0%, #1E3A8A 100%);
+  background: linear-gradient(135deg, #0F2A44 0%, #1E3A8A 50%, #172554 100%);
 }
 
 .text-gradient-navy {
-  background: linear-gradient(135deg, #0F2A44 0%, #334155 100%);
+  background: linear-gradient(135deg, #0F2A44 0%, #1E3A8A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 42, 68, 0.08);
+}
+
+.mesh-gradient {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(210, 64%, 16%, 0.03) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(220, 70%, 25%, 0.05) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(215, 80%, 30%, 0.03) 0, transparent 50%);
+}
+
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-15px) rotate(1deg); }
 }
 
 .reveal-on-scroll {
   opacity: 1;
+}
+
+/* Sophisticated Hover Glow */
+.glow-on-hover {
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.glow-on-hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, #0F2A44, #1E3A8A, #3B82F6);
+  z-index: -1;
+  opacity: 0;
+  border-radius: inherit;
+  transition: opacity 0.5s ease;
+  filter: blur(8px);
+}
+
+.glow-on-hover:hover::after {
+  opacity: 0.2;
 }
