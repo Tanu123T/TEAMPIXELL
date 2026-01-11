@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Star } from 'lucide-react';
 import { Button } from './ui/button';
 import { useRef } from 'react';
 
@@ -12,6 +12,13 @@ export function Hero() {
   
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  const expertiseItems = [
+    { label: 'Meta Ads', icon: Zap },
+    { label: 'Google Ads', icon: Sparkles },
+    { label: 'Technology', icon: Star },
+    { label: 'Creative', icon: Zap }
+  ];
   
   return (
     <section ref={ref} className="min-h-screen flex items-center justify-center px-6 py-32 relative overflow-hidden bg-white">
@@ -30,49 +37,75 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0F2A44]/5 border border-[#0F2A44]/10 text-[#0F2A44] text-sm font-medium"
           >
             <Sparkles className="size-4 animate-pulse" />
-            <span>Digital Excellence Partner</span>
+            <span>Premium Digital Solutions</span>
           </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-bold tracking-tight text-gradient-navy leading-[1.1]"
-          >
-            Strategy <br />
-            <span className="text-[#0F2A44]">Elevated.</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-[#475569] max-w-xl leading-relaxed"
-          >
-            We partner with ambitious brands to deliver high-performance digital systems, 
-            sophisticated design, and measurable growth.
-          </motion.p>
-          
+          <div className="space-y-6">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-6xl md:text-7xl font-bold tracking-tight text-[#0F2A44] leading-[1.1]"
+            >
+              Where Strategy <br />
+              <span className="text-gradient-navy font-black italic">Meets Sophistication.</span>
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-[#475569] max-w-xl leading-relaxed"
+            >
+              TEAM PIXELL partners with ambitious brands to deliver refined digital experiences, performance-driven growth, and measurable impact.
+            </motion.p>
+          </div>
+
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-wrap gap-4 pt-4"
+            className="flex flex-wrap gap-3"
+          >
+            {expertiseItems.map((item, i) => (
+              <div 
+                key={i}
+                className="px-4 py-2 rounded-xl bg-slate-50 border border-[#E6ECF4] text-[#0F2A44] text-sm font-bold flex items-center gap-2"
+              >
+                <item.icon className="size-3 text-[#0F2A44]" />
+                {item.label}
+              </div>
+            ))}
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-8 pt-4"
           >
             <Button 
               size="lg" 
               className="bg-[#0F2A44] hover:bg-[#1E3A8A] text-white rounded-full px-10 py-7 text-lg shadow-xl shadow-[#0F2A44]/10 transition-all hover:scale-105"
               onClick={() => window.open('https://wa.me/919370718105', '_blank')}
             >
-              Start Your Project
+              Start a Conversation
               <ArrowRight className="ml-2 size-5" />
             </Button>
             
-            <div className="flex -space-x-3 items-center ml-4">
-              {[1,2,3].map(i => (
-                <div key={i} className="size-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-[10px] font-bold text-[#0F2A44]">TP</div>
-              ))}
-              <span className="ml-6 text-sm font-medium text-[#475569]">Trusted by 50+ brands</span>
+            <div className="flex items-center gap-8">
+              <div className="flex flex-col">
+                <span className="text-2xl font-black text-[#0F2A44]">50+</span>
+                <span className="text-xs font-bold text-[#475569] uppercase tracking-wider">Happy Clients</span>
+              </div>
+              <div className="w-px h-8 bg-[#E6ECF4]" />
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1">
+                  <span className="text-2xl font-black text-[#0F2A44]">4.9</span>
+                  <Star className="size-4 fill-amber-400 text-amber-400" />
+                </div>
+                <span className="text-xs font-bold text-[#475569] uppercase tracking-wider">Rating</span>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -80,7 +113,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="relative"
         >
           <div className="absolute inset-0 bg-[#0F2A44] rounded-[2.5rem] rotate-3 -z-10 opacity-5" />
