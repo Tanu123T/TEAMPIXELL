@@ -1,10 +1,20 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap, Star } from 'lucide-react';
 import { Button } from './ui/button';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
+// Using actual base64 strings provided by the user
+const heroImages = [
+  "attached_assets/Pasted-data-image-jpeg-base64-9j-4AAQSkZJRgABAQAAAQABAAD-2wCEA_1768154859527.txt",
+  "attached_assets/Pasted-data-image-jpeg-base64-9j-4AAQSkZJRgABAQAAAQABAAD-2wCEA_1768154895532.txt",
+  "attached_assets/Pasted-data-image-jpeg-base64-9j-4AAQSkZJRgABAQAAAQABAAD-2wCEA_1768154928511.txt"
+];
 
 export function Hero() {
   const ref = useRef(null);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [images, setImages] = useState<string[]>([]);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -12,6 +22,29 @@ export function Hero() {
   
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  useEffect(() => {
+    // Load the base64 content from the provided files
+    const loadImages = async () => {
+      try {
+        const loadedImages = await Promise.all(
+          heroImages.map(async (path) => {
+            const response = await fetch('/' + path);
+            return await response.text();
+          })
+        );
+        setImages(loadedImages);
+      } catch (error) {
+        console.error("Error loading hero images:", error);
+      }
+    };
+    loadImages();
+
+    const interval = setInterval(() => {
+      setImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   
   const expertiseItems = [
     { label: 'Meta Ads', icon: Zap },
@@ -117,14 +150,28 @@ export function Hero() {
           className="relative"
         >
           <div className="absolute inset-0 bg-[#0F2A44] rounded-[2.5rem] rotate-3 -z-10 opacity-5" />
-          <div className="bg-white p-4 rounded-[2.5rem] shadow-2xl border border-[#E6ECF4] relative overflow-hidden group">
+          <div className="bg-white p-4 rounded-[2.5rem] shadow-2xl border border-[#E6ECF4] relative overflow-hidden group min-h-[500px] flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#0F2A44]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="aspect-square bg-slate-50 rounded-[2rem] flex items-center justify-center p-12 overflow-hidden">
-               <svg viewBox="0 0 200 200" className="w-full h-full text-[#0F2A44]/20 animate-float">
-                <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="8 8" />
-                <path d="M40 100 Q100 20 160 100 T280 180" fill="none" stroke="currentColor" strokeWidth="1" />
-                <rect x="70" y="70" width="60" height="60" className="text-[#0F2A44]/40" fill="none" stroke="currentColor" strokeWidth="2" />
-              </svg>
+            <div className="w-full h-full relative aspect-square bg-slate-50 rounded-[2rem] flex items-center justify-center overflow-hidden">
+               <AnimatePresence mode="wait">
+                 {images[imageIndex] ? (
+                   <motion.img
+                     key={imageIndex}
+                     src={images[imageIndex]}
+                     initial={{ opacity: 0, scale: 1.1 }}
+                     animate={{ opacity: 1, scale: 1 }}
+                     exit={{ opacity: 0, scale: 0.95 }}
+                     transition={{ duration: 0.8 }}
+                     className="absolute inset-0 w-full h-full object-cover"
+                   />
+                 ) : (
+                   <svg viewBox="0 0 200 200" className="w-full h-full text-[#0F2A44]/20 animate-float">
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="8 8" />
+                    <path d="M40 100 Q100 20 160 100 T280 180" fill="none" stroke="currentColor" strokeWidth="1" />
+                    <rect x="70" y="70" width="60" height="60" className="text-[#0F2A44]/40" fill="none" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                 )}
+               </AnimatePresence>
             </div>
           </div>
           
