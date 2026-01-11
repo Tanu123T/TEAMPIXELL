@@ -108,7 +108,7 @@ export function ProcessSection() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               className="inline-block px-4 py-1.5 rounded-full bg-[#0F2A44]/5 text-xs font-bold tracking-[0.2em] text-[#0F2A44] uppercase"
             >
-              The Methodology
+              Our Process
             </motion.span>
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
@@ -116,7 +116,7 @@ export function ProcessSection() {
               transition={{ delay: 0.1, type: "spring", stiffness: 100 }}
               className="text-4xl md:text-7xl font-bold text-[#0F2A44] tracking-tight"
             >
-              Our <span className="text-gradient-navy italic">Process.</span>
+              How We <span className="text-gradient-navy italic">Transform Your Vision Into Reality</span>
             </motion.h2>
           </div>
           
