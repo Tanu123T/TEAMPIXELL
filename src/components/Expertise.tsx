@@ -61,32 +61,32 @@ export function Expertise() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-32 px-6 relative bg-[#F8FAFC] overflow-hidden">
+    <section ref={ref} className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 relative bg-[#F8FAFC] overflow-hidden">
       {/* Abstract Design Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0F2A44]/5 rounded-full blur-[120px] -mr-64 -mt-64" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#1E3A8A]/5 rounded-full blur-[100px] -ml-48 -mb-48" />
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="space-y-24">
-          <div className="text-center space-y-6">
+        <div className="space-y-16 sm:space-y-24">
+          <div className="text-center space-y-4 sm:space-y-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-[#0F2A44]/10 shadow-sm"
+              className="inline-flex items-center px-3 sm:px-4 py-1.5 rounded-full bg-white border border-[#0F2A44]/10 shadow-sm"
             >
-              <span className="text-xs font-bold tracking-[0.2em] text-[#0F2A44] uppercase">Capabilities</span>
+              <span className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#0F2A44] uppercase">Capabilities</span>
             </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-7xl font-bold text-[#0F2A44] tracking-tight leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-[#0F2A44] tracking-tight leading-tight"
             >
               Driven by <span className="text-gradient-navy">Precision.</span>
             </motion.h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
@@ -115,10 +115,11 @@ export function Expertise() {
                       {service.description}
                     </p>
                     
-                    <div className="pt-6 border-t border-slate-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="pt-6 border-t border-slate-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs font-bold text-[#0F2A44] uppercase tracking-wider">
                         Strategic Execution
                       </div>
+                      <ArrowRight className="size-4 text-[#0F2A44] group-hover:translate-x-2 transition-transform duration-300" />
                     </div>
                   </div>
                 </motion.div>

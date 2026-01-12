@@ -7,11 +7,16 @@ import { Expertise } from './components/Expertise';
 import { ProcessSection } from './components/ProcessSection';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { BackgroundEffects } from './components/BackgroundEffects';
+import { LoadingScreen } from './components/LoadingScreen';
+import { ScrollToTop } from './components/ScrollToTop';
 
 export default function App() {
   console.log('App rendering');
   return (
     <div className="min-h-screen w-full relative bg-white flex flex-col">
+      <LoadingScreen />
+      <BackgroundEffects />
       <Navigation />
       
       <main id="top" className="flex-grow">
@@ -33,6 +38,7 @@ export default function App() {
       </main>
       
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

@@ -111,14 +111,38 @@ body {
   opacity: 0.25;
 }
 
-/* Decorative Background Elements */
-.bg-blob {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  filter: blur(100px);
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.4;
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .text-4xl {
+    font-size: 2rem;
+    line-height: 2.25rem;
+  }
+  
+  .text-5xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  
+  .text-6xl {
+    font-size: 2.5rem;
+    line-height: 2.75rem;
+  }
+  
+  .text-7xl {
+    font-size: 2.75rem;
+    line-height: 3rem;
+  }
+}
+
+/* Ensure minimum touch targets */
+@media (max-width: 768px) {
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
+  
+  .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
